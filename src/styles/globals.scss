@@ -1,0 +1,450 @@
+@use "mixins" as *;
+@use "variables" as *;
+@use "reset" as *;
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+// }
+
+.app {
+  @include themify("background", "bg-light");
+  @include themify("color", "color");
+  @include responsive(map-get($breakPoints, "sm")) {
+    flex-direction: column;
+  }
+  * {
+    @include text-setting(16px, 1.2, 600, start);
+  }
+  & {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    gap: $padding;
+    padding: $padding;
+  }
+
+  aside {
+    width: 460px;
+
+    header {
+      min-height: 130px;
+      display: flex;
+      gap: $padding - 5px;
+      margin-bottom: $padding;
+
+      button {
+        @include disabledItem;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $padding - 5px;
+        cursor: pointer;
+
+        svg {
+          font-size: xxx-large;
+        }
+        span {
+          @include text-setting(20px, 1.2, 900, center);
+        }
+      }
+
+      .add-new-btn {
+        border-radius: 10px;
+        width: 290px;
+        background-color: map-get($mainColors, "sky-color");
+        svg,
+        svg *,
+        span {
+          color: black;
+        }
+      }
+      .print-btn {
+        @include themify("background", "bg");
+        border: $border;
+        box-shadow: $shadow;
+        border-radius: 8px;
+        flex-direction: column;
+        flex: 1;
+        svg,
+        svg * {
+          @include themify("color", "icon-color");
+        }
+      }
+    }
+
+    article {
+      @include themify("background", "bg");
+      @include disabledItem;
+      border: $border;
+      box-shadow: $shadow;
+      border-radius: 10px;
+
+      &.cart {
+        padding-top: $padding;
+        border-radius: 0;
+        display: flex;
+        gap: $padding;
+        flex-direction: column;
+        height: 500px;
+        overflow-y: auto;
+
+        section {
+          @include themify("background", "bg-light");
+          display: flex;
+          justify-content: center;
+          border-bottom: $border;
+          padding: $padding;
+
+          * {
+            flex: 1;
+            text-align: center;
+            height: 24px;
+            line-height: 20px;
+          }
+
+          .remove-product {
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: map-get($mainColors, "red-color");
+            color: $white;
+            flex: 0.5;
+            padding: 2px 0;
+          }
+        }
+      }
+
+      &.discount {
+        margin-top: $padding;
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+
+        p {
+          padding: 0 $padding;
+        }
+        div {
+          @include themify("background", "bg-light");
+          border-right: $border;
+          width: 80px;
+          line-height: 45px;
+          text-align: center;
+          // background-color: $white-50;
+        }
+      }
+
+      &.total {
+        margin-top: $padding;
+        height: 215px;
+        padding: $padding;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .total-price {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 $padding;
+          p {
+            font-weight: bold;
+          }
+          div {
+            @include text-setting(24px, 1.2, 900, end);
+          }
+        }
+        .cart-actions {
+          display: flex;
+          flex-direction: column;
+          gap: $padding;
+          width: 100%;
+          button {
+            @include text-setting(20px, 60px, 900, center);
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: $white;
+
+            &:first-child {
+              background-color: map-get($map: $mainColors, $key: "red-color");
+            }
+            &:last-child {
+              background-color: map-get($map: $mainColors, $key: "green-color");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    @include responsive(map-get($breakPoints, "sm")) {
+      width: 100%;
+    }
+    flex: 1;
+    position: relative;
+    padding: 0 $padding;
+
+    header {
+      min-height: $header-height;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: $padding - 5px;
+      margin-bottom: $padding;
+
+      section {
+        display: flex;
+        button {
+          height: $header-height;
+
+          &.header-btn {
+            @include disabledItem;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: $padding - 5px;
+            padding: $padding - 5px;
+            cursor: pointer;
+
+            &:first-child {
+              background-color: map-get($mainColors, "red-color");
+              width: 250px;
+            }
+            &:last-child {
+              @include themify("background", "bg");
+              border: $border;
+              width: 200px;
+            }
+
+            span {
+              line-height: $header-height;
+            }
+          }
+        }
+      }
+      .system-locked {
+        gap: $padding - 5px;
+        * {
+          color: #ff0000;
+          font-size: 24px;
+        }
+      }
+      .theme-btn {
+        @include themify("background", "bg");
+        border: $border;
+        width: 60px;
+        height: $header-height;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .search-input {
+        @include themify("background", "bg");
+        @include disabledItem;
+        border: $border;
+        width: 300px;
+        height: $header-height;
+        padding: $padding - 5px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: $padding - 5px;
+        flex: 1;
+
+        input {
+          font-weight: normal;
+        }
+      }
+    }
+
+    .collections {
+      @include themify("background", "bg");
+      border: $border;
+      box-shadow: $shadow;
+      padding: $padding;
+
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      .collection {
+        > section {
+          display: grid;
+          gap: $padding - 5px;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        h2 {
+          @include text-setting(20px, 1.2, 900, start);
+          margin-bottom: $padding;
+        }
+        .product {
+          @include themify("background", "bg-light");
+          @include disabledItem;
+          cursor: pointer;
+          position: relative;
+          width: 200px;
+          height: 235px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          gap: $padding - 5px;
+          border: $border;
+          box-shadow: $shadow;
+          border-radius: $radius;
+          padding: 7px;
+          * {
+            @include text-setting(16px, 1.2, 600, center);
+            // color: black;
+          }
+          .product-size {
+            @include text-setting(12px, 25px, 600, center);
+            @include themify("background", "bg");
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            height: 25px;
+            width: 50px;
+            border-radius: $radius;
+            border: $border;
+          }
+        }
+      }
+    }
+
+    .disable-system {
+      @include themify("background", "bg-reverse");
+      @include themify("color", "bg");
+      @include text-setting(20px, 1.2, 900, center);
+
+      position: fixed;
+      bottom: $padding;
+      left: $padding;
+      z-index: 9999999999999;
+      width: 165px;
+      height: 80px;
+      line-height: 80px;
+      cursor: pointer;
+      border-radius: 47px;
+    }
+  }
+}
+
+.icon {
+  &,
+  * {
+    @include themify("color", "icon-color");
+  }
+  font-size: 24px;
+}
+
+/* Invoice styles */
+.invoice {
+  background-color: gray;
+  position: fixed;
+  left: 50%;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  min-height: 795px;
+  * {
+    color: $black;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 20px;
+    h2 {
+      font-size: 24px;
+      margin: 0;
+    }
+  }
+
+  .title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 20px;
+  }
+
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    th,
+    td {
+      border: 1px solid #333;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 18px;
+
+    .total-amount {
+      padding: 10px;
+      border: 1px solid #333;
+      width: 60px;
+      text-align: center;
+    }
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: gray;
+    margin-top: 20px;
+  }
+}
+
+/* Print styles */
+@media print {
+  @page {
+    size: A5;
+    margin: 0;
+    padding: 0;
+  }
+  body * {
+    visibility: hidden;
+  }
+  aside {
+    display: none;
+  }
+  main {
+    display: none;
+  }
+
+  .invoice,
+  .invoice * {
+    visibility: visible;
+  }
+
+  .invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}

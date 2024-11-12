@@ -1,0 +1,34 @@
+@use "variables" as *;
+@mixin text-setting($font-size, $line-height, $font-weight, $text-align) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  text-align: $text-align;
+}
+
+// Responsive
+@mixin responsive($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin themify($property, $key, $themes: $themes) {
+  transition: color 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  @each $theme, $colors in $themes {
+    &.#{$theme},
+    .#{$theme} & {
+      #{$property}: map-get($colors, $key);
+    }
+  }
+}
+
+@mixin disabledItem {
+  // transition: opacity 0.3s ease;
+  &.disable,
+  .disable & {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

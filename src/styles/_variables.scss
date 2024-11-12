@@ -1,0 +1,46 @@
+$font-family: Arial, sans-serif;
+$font-size: 16px;
+$line-height: 1.5;
+$shadow: 0px 3px 3px 0px #00000029;
+$transition: all 0.3s ease;
+$border: 0.4px solid #2f2f2f21;
+$radius: 13px;
+$weights: 400, 600, 700;
+$alignments: start, center, end;
+$padding: 15px;
+$header-height: 64px;
+$gray: #474646;
+$white: #ffffff;
+$white-50: #ededed;
+$black: #161616;
+$breakPoints: (
+  "xs": 0,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+);
+
+$mainColors: (
+  "green-color": #009692,
+  "red-color": #ff7575,
+  "sky-color": #A5CCFF,
+);
+
+$themes: (
+  "light": (
+    "bg": $white,
+    "bg-light": $white,
+    "bg-reverse": $black,
+    "icon-color": $black,
+    "color": $black,
+  ),
+  "dark": (
+    "bg": $black,
+    "bg-light": $gray,
+    "bg-reverse": $white-50,
+    "color": $white-50,
+    "icon-color": $gray,
+  ),
+);

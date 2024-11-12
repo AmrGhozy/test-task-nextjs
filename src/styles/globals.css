@@ -532,7 +532,7 @@ input:focus::placeholder {
 .invoice {
   background-color: gray;
   position: fixed;
-  left: 50%;
+  left: -100%;
   color: #333;
   max-width: 600px;
   margin: 0 auto;

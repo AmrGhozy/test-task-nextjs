@@ -8,10 +8,12 @@ import React from "react";
 import SearchInput from "./components/SearchInput";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import SystemLocked from "./components/SystemLocked";
+import BargerBtn from "./components/BargerBtn";
 
 function Header() {
   return (
     <header>
+      <BargerBtn />
       <section>
         {[
           [faComputerMouse, "عمليات بيع يدوية"],

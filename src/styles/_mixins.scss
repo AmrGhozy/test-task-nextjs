@@ -14,7 +14,8 @@
 }
 
 @mixin themify($property, $key, $themes: $themes) {
-  transition: color 0.3s ease, background 0.3s ease, opacity 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease, opacity 0.3s ease,
+    transform 0.3s ease;
   @each $theme, $colors in $themes {
     &.#{$theme},
     .#{$theme} & {
@@ -24,7 +25,6 @@
 }
 
 @mixin disabledItem {
-  // transition: opacity 0.3s ease;
   &.disable,
   .disable & {
     cursor: not-allowed;

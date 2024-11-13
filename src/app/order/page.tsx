@@ -1,4 +1,5 @@
 import DisableSystemBtn from "@/components/buttons/DisableSystemBtn";
+import SearchCollection from "@/components/pages/order/SearchCollection";
 import PrinterCard from "@/components/shared/cards/PrinterCard";
 import Collection from "@/components/shared/Collection";
 import { popularProducts, allProducts } from "@/constants/products";
@@ -13,6 +14,7 @@ export default function Order() {
         <Header />
         <DisableSystemBtn />
         <div className="collections">
+          <SearchCollection />
           <Collection products={popularProducts} title="منتجات مميزة" />
           <Collection products={allProducts} title="كل المنتجات" />
         </div>

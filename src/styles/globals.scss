@@ -1,11 +1,6 @@
 @use "mixins" as *;
 @use "variables" as *;
 @use "reset" as *;
-// @media (prefers-color-scheme: dark) {
-//   html {
-//     color-scheme: dark;
-//   }
-// }
 
 .app {
   @include themify("background", "bg-light");
@@ -23,9 +18,38 @@
     gap: $padding;
     padding: $padding;
   }
+  position: relative;
 
   aside {
     width: 460px;
+    @include responsive(map-get($breakPoints, "lg")) {
+      @include themify("background", "bg-light");
+      padding-top: 30px;
+      z-index: 999999;
+      transition: 0.5s;
+      position: fixed;
+      top: 0;
+      right: 0;
+      transform: translateX(100%);
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        transform: translateX(100%);
+        transition: 0.5s;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+      &.open {
+        transform: translateX(0);
+        &::before {
+          transform: translateX(0);
+        }
+      }
+    }
 
     header {
       min-height: 130px;
@@ -132,7 +156,6 @@
           width: 80px;
           line-height: 45px;
           text-align: center;
-          // background-color: $white-50;
         }
       }
 
@@ -233,6 +256,8 @@
           font-size: 24px;
         }
       }
+
+      .barger-btn,
       .theme-btn {
         @include themify("background", "bg");
         border: $border;
@@ -242,6 +267,20 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+      }
+      .barger-btn {
+        @media screen and (min-width: map-get($breakPoints, "lg")) {
+          display: none;
+        }
+        border-radius: 50%;
+        height: 60px;
+        &.open {
+          position: fixed;
+          top: 30px;
+          left: 20px;
+          z-index: 999999;
+          transform: rotate(90deg);
+        }
       }
       .search-input {
         @include themify("background", "bg");
@@ -298,9 +337,9 @@
           box-shadow: $shadow;
           border-radius: $radius;
           padding: 7px;
+          margin: auto;
           * {
             @include text-setting(16px, 1.2, 600, center);
-            // color: black;
           }
           .product-size {
             @include text-setting(12px, 25px, 600, center);
@@ -347,8 +386,8 @@
 .invoice {
   background-color: gray;
   position: fixed;
-  // left: 50%;
   left: -100%;
+  opacity: 0;
   color: #333;
   max-width: 600px;
   margin: 0 auto;
@@ -362,44 +401,68 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     h2 {
       font-size: 24px;
       margin: 0;
     }
   }
 
+  .code {
+    @include text-setting(20px, 1.2, 700, end);
+    color: rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid $black;
+  }
   .title {
     text-align: center;
     margin: 20px 0;
-    font-size: 20px;
   }
-
-  .product-table {
+  .table {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 
-    th,
-    td {
-      border: 1px solid #333;
-      padding: 8px;
-      text-align: center;
-    }
+    .item {
+      height: 40px;
+      display: flex;
+      border: 1px solid $black;
+      padding: 5px;
 
-    th {
-      background-color: #f0f0f0;
-      font-weight: bold;
-    }
+      div {
+        @include text-setting(12px, 1.2, 600, center);
+        text-align: center;
+        padding: 5px 0;
+        flex: 1;
+      }
+      :not(:first-child) {
+        border-right: 1px solid $black;
+      }
+      &.head .index {
+        transform: rotate(-90deg);
+      }
+      .index {
+        flex: 0.3;
+      }
+      .name-col {
+        flex: 1.7;
+      }
+      &.product {
+        margin-top: 15px;
 
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
+        // &.even {
+        //   background: rgba(0, 0, 0, 0.1);
+        // }
+        // &.odd {
+        //   background: rgba(0, 0, 0, 0.5);
+        // }
+      }
     }
   }
 
   .total {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     font-weight: bold;
     margin-top: 20px;
     font-size: 18px;
@@ -407,7 +470,8 @@
     .total-amount {
       padding: 10px;
       border: 1px solid #333;
-      width: 60px;
+      min-width: 80px;
+      max-width: 200px;
       text-align: center;
     }
   }
@@ -447,5 +511,6 @@
     left: 0;
     top: 0;
     width: 100%;
+    opacity: 1;
   }
 }

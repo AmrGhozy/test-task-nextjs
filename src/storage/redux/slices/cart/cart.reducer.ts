@@ -8,6 +8,11 @@ const reducers = {
   removeOne: (state: CartState, action: { payload: { id: number } }) => {
     state.products = state.products.filter((product) => product.id !== action.payload.id);
   },
+  searchInProducts: (state: CartState, action: { payload: string  }) => {
+    console.log(action.payload);
+    
+    state.searcByName = action.payload
+  },
   resetCart: () => initialState,
 };
 
